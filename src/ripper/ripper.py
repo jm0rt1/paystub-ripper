@@ -1,5 +1,6 @@
 from pathlib import Path
 import PyPDF2
+import re
 
 
 class PDFSplitter:
@@ -27,9 +28,24 @@ class PDFSplitter:
 
             pdf_writer.add_page(pdf_reader.pages[page])
 
-            output_pdf_path = self.output_pdf_base_path / \
-                f"pay_date_{pay_date_str}.pdf"
+            output_pdf_path = self.generate_unique_filename(
+                f'pay_date_{pay_date_str}')
+
             with open(output_pdf_path, 'wb') as output_pdf:
                 pdf_writer.write(output_pdf)
 
         pdf_file.close()
+
+    def generate_unique_filename(self, base_name: str):
+        # Replace non-alphanumeric characters with underscore
+        base_name = re.sub(r'\W+', '_', base_name)
+        filename = f"{base_name}.pdf"
+        output_pdf_path = self.output_pdf_base_path / filename
+
+        i = 1
+        while output_pdf_path.exists():
+            filename = f"{base_name}_{i}.pdf"
+            output_pdf_path = self.output_pdf_base_path / filename
+            i += 1
+
+        return output_pdf_path
