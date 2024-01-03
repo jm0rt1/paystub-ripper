@@ -26,5 +26,5 @@ def main():
     for file_name in os.listdir(input_foler_path):
         if file_name.endswith(".pdf"):
             pdf_splitter = PDFSplitter(
-                GlobalSettings.INPUT_DIR/file_name, GlobalSettings.OUTPUT_DIR/file_name)
+                GlobalSettings.INPUT_DIR/file_name, GlobalSettings.OUTPUT_DIR)
             pdf_splitter.split()
