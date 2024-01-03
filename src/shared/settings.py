@@ -8,13 +8,15 @@ class GlobalSettings():
     # Paths ---------
     APP_DIR = Path("./").resolve()
 
-    # Output Directory
+    # I/O Directories
     OUTPUT_DIR = APP_DIR/"output"
+    INPUT_DIR = APP_DIR/"input"
     # Logging Related Paths
     LOGS_DIR = OUTPUT_DIR/"logs"
     GLOBAL_LOGS_DIR = LOGS_DIR/"global"
     UI_LOGS_DIR = LOGS_DIR/"ui"
     # Paths ---------
+
     ##
 
     class LoggingParams():
